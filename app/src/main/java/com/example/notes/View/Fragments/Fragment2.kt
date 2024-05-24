@@ -1,4 +1,4 @@
-package com.example.notes
+package com.example.notes.View.Fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +8,13 @@ import android.widget.AdapterView
 import android.widget.GridView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.notes.ViewModel.NoteViewModel
+import com.example.notes.R
+import com.example.notes.View.Adapters.GridAdapter
 
 class Fragment2 : Fragment() {
 
-    private lateinit var MyGrid: GridView
+    private lateinit var myGrid: GridView
     private val noteViewModel: NoteViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -20,15 +23,16 @@ class Fragment2 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        MyGrid = view.findViewById(R.id.list_view)
+        myGrid = view.findViewById(R.id.list_view)
 
         val adapter = GridAdapter(requireContext(), noteViewModel.notes.value ?: mutableListOf())
-        MyGrid.adapter = adapter
+        myGrid.adapter = adapter
 
-        MyGrid.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+        myGrid.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             val note = noteViewModel.notes.value?.get(position)
             note?.let {
-                val editDialog = EditNoteDialogFragment.newInstance(it)
+                noteViewModel.setCurrentNote(it)
+                val editDialog = EditNoteDialogFragment.newInstance()
                 editDialog.show(parentFragmentManager, "EditNoteDialogFragment")
             }
         }

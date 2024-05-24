@@ -1,4 +1,4 @@
-package com.example.notes
+package com.example.notes.View.Fragments
 
 import android.os.Bundle
 import android.text.Editable
@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import com.example.notes.Model.Note
+import com.example.notes.R
+import com.example.notes.ViewModel.NoteViewModel
 import com.google.android.material.textfield.TextInputEditText
 
 class EditNoteDialogFragment : DialogFragment() {
@@ -17,9 +20,7 @@ class EditNoteDialogFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            note = it.getParcelable(ARG_NOTE)
-        }
+        note = noteViewModel.currentNote.value
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -58,17 +59,12 @@ class EditNoteDialogFragment : DialogFragment() {
         note?.let {
             noteViewModel.updateNote(it)
         }
+        noteViewModel.clearCurrentNote()
     }
 
     companion object {
-        private const val ARG_NOTE = "note"
-
-        fun newInstance(note: Note): EditNoteDialogFragment {
-            val fragment = EditNoteDialogFragment()
-            val args = Bundle()
-            args.putParcelable(ARG_NOTE, note)
-            fragment.arguments = args
-            return fragment
+        fun newInstance(): EditNoteDialogFragment {
+            return EditNoteDialogFragment()
         }
     }
 }

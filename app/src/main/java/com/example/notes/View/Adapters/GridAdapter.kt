@@ -1,4 +1,4 @@
-package com.example.notes
+package com.example.notes.View.Adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import com.example.notes.Model.Note
+import com.example.notes.R
 
 class GridAdapter(private val context: Context, private var noteList: List<Note>) : BaseAdapter() {
     override fun getCount(): Int {

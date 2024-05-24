@@ -1,4 +1,4 @@
-package com.example.notes
+package com.example.notes.View.Fragments
 
 import android.os.Bundle
 import android.text.Editable
@@ -10,6 +10,9 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.notes.Model.Note
+import com.example.notes.R
+import com.example.notes.ViewModel.NoteViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
